@@ -1,0 +1,137 @@
+<!-- Page de détail du problème d'algorithmes -->
+{% extends "base.html" %}
+
+{% block title %}{{ probleme.titre }} - Algorithmes{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-6">
+        <nav class="text-sm text-gray-500 mb-4">
+            <a href="{% url 'app_algs:accueil' %}" class="hover:text-blue-600">Algorithmes</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-900">{{ probleme.titre }}</span>
+        </nav>
+        
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold text-gray-900">{{ probleme.titre }}</h1>
+            <span class="px-3 py-1 text-sm rounded-full {% if probleme.difficulte == 'facile' %}bg-green-100 text-green-800{% elif probleme.difficulte == 'moyen' %}bg-yellow-100 text-yellow-800{% else %}bg-red-100 text-red-800{% endif %}">
+                {{ probleme.get_difficulte_display }}
+            </span>
+        </div>
+        
+        <div class="mt-4 flex items-center text-gray-600 text-sm">
+            <span>{{ probleme.date_creation|date:"F d, Y" }}</span>
+            {% if probleme.complexity_temporelle %}
+                <span class="mx-2">•</span>
+                <span>Temps: {{ probleme.complexity_temporelle }}</span>
+            {% endif %}
+            {% if probleme.complexity_spatiale %}
+                <span class="mx-2">•</span>
+                <span>Espace: {{ probleme.complexity_spatiale }}</span>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Description</h2>
+                <div class="prose max-w-none">
+                    <p class="text-gray-700">{{ probleme.description }}</p>
+                </div>
+                
+                {% if probleme.exemple_entrée %}
+                    <div class="mt-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Exemple d'entrée</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm">
+                            <pre>{{ probleme.exemple_entrée }}</pre>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if probleme.exemple_sortie %}
+                    <div class="mt-4">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Exemple de sortie</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm">
+                            <pre>{{ probleme.exemple_sortie }}</pre>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            
+            {% if probleme.sous_problemes.exists %}
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Sous-problèmes</h2>
+                    <div class="space-y-4">
+                        {% for sous_probleme in probleme.sous_problemes.all %}
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h3 class="font-semibold text-gray-900">{{ sous_probleme.titre }}</h3>
+                                <p class="text-gray-600 text-sm mt-1">{{ sous_probleme.description|truncatewords:30 }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Solutions</h2>
+                
+                {% if meilleure_solution %}
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-medium text-gray-900">{{ meilleure_solution.langage }}</h3>
+                                <span class="text-xs text-gray-500">{{ meilleure_solution.date_publication|date:"M d, Y" }}</span>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg font-mono text-xs">
+                                <pre>{{ meilleure_solution.code|truncatechars:200 }}</pre>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">{{ meilleure_solution.explication|truncatewords:30 }}</p>
+                            <div class="mt-2">
+                                <span class="text-xs text-gray-500">Publiée le {{ meilleure_solution.date_publication|date:"M d, Y" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-gray-600">Aucune solution disponible pour ce problème.</p>
+                {% endif %}
+            </div>
+            
+            {% if request.user.is_authenticated and not request.user.is_enseignant %}
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Votre progression</h2>
+                    
+                    {% if progression_etudiante %}
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">Problème résolu</span>
+                                <span class="px-2 py-1 rounded-full text-xs {% if progression_etudiante.est_resolu %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                                    {% if progression_etudiante.est_resolu %}Résolu{% else %}Non résolu{% endif %}
+                                </span>
+                            </div>
+                            
+                            {% if progression_etudiante.est_resolu %}
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-700">Note obtenue</span>
+                                    <span class="font-semibold text-gray-900">{{ progression_etudiante.note_obtenue }}/{{ progression_etudiante.max_note }}</span>
+                                </div>
+                            {% endif %}
+                            
+                            <a href="{% url 'app_algs:resoudre_probleme' pk=probleme.pk %}" class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                {% if progression_etudiante %}Mettre à jour la solution{% else %}Commencer à résoudre{% endif %}
+                            </a>
+                        </div>
+                    {% else %}
+                        <p class="text-gray-600 mb-4">Vous n'avez pas encore tenté ce problème.</p>
+                        <a href="{% url 'app_algs:resoudre_probleme' pk=probleme.pk %}" class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                            Commencer à résoudre
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

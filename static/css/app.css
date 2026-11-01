@@ -1,0 +1,84 @@
+/* ============================================================
+   Plateforme — feuille de style globale
+   (bascule douce + MODE NUIT, activé par le bouton 🌙 de la navbar)
+   ============================================================ */
+
+/* Transition douce quand le thème change */
+body {
+    transition: background-color .25s ease, color .25s ease;
+}
+
+/* ------------------------------------------------------------
+   MODE NUIT — actif quand <html> porte la classe « dark »
+   Les classes Tailwind existantes sont simplement re-teintées :
+   aucun template à modifier, tout le site est couvert.
+   ------------------------------------------------------------ */
+html.dark {
+    color-scheme: dark;
+}
+
+html.dark body {
+    background-color: #0b1220;
+    color: #e2e8f0;
+}
+
+/* ── Surfaces ── */
+/* !important requis : Bootstrap écrase aussi .bg-white avec !important */
+html.dark .bg-white { background-color: #111a2c !important; }
+html.dark .bg-gray-50 { background-color: #0b1220; }
+html.dark .bg-gray-100 { background-color: #182338; }
+html.dark .bg-gray-200 { background-color: #233150; }
+html.dark canvas { background-color: #111a2c; }
+
+/* ── Textes neutres ── */
+html.dark .text-gray-900 { color: #f8fafc; }
+html.dark .text-gray-800 { color: #e2e8f0; }
+html.dark .text-gray-700 { color: #cbd5e1; }
+html.dark .text-gray-600 { color: #94a3b8; }
+html.dark .text-gray-500 { color: #94a3b8; }
+html.dark .text-gray-400 { color: #cbd5e1; }
+html.dark ::placeholder { color: #64748b; opacity: 1; }
+
+/* ── Textes accentués (éclaircis pour la lisibilité) ── */
+html.dark .text-blue-600 { color: #60a5fa; }
+html.dark .text-blue-700 { color: #93c5fd; }
+html.dark .text-blue-800 { color: #93c5fd; }
+html.dark .text-blue-900 { color: #bfdbfe; }
+html.dark .text-green-600 { color: #4ade80; }
+html.dark .text-green-700 { color: #86efac; }
+html.dark .text-green-800 { color: #86efac; }
+html.dark .text-red-600 { color: #f87171; }
+html.dark .text-red-700 { color: #fca5a5; }
+html.dark .text-red-800 { color: #fca5a5; }
+html.dark .text-purple-600 { color: #c084fc; }
+html.dark .text-purple-700 { color: #d8b4fe; }
+html.dark .text-amber-600 { color: #fbbf24; }
+html.dark .text-amber-700 { color: #fcd34d; }
+html.dark .text-yellow-600 { color: #fde047; }
+html.dark .text-yellow-700 { color: #fde047; }
+html.dark .text-yellow-800 { color: #fde047; }
+html.dark .text-indigo-600 { color: #818cf8; }
+
+/* ── Pastilles / badges / messages : teintes profondes ── */
+html.dark .bg-blue-50,   html.dark .bg-blue-100   { background-color: #172554; }
+html.dark .bg-green-50,  html.dark .bg-green-100  { background-color: #052e16; }
+html.dark .bg-red-50,    html.dark .bg-red-100    { background-color: #450a0a; }
+html.dark .bg-yellow-50, html.dark .bg-yellow-100,
+html.dark .bg-amber-50,  html.dark .bg-amber-100  { background-color: #451a03; }
+html.dark .bg-purple-50, html.dark .bg-purple-100 { background-color: #3b0764; }
+
+/* ── Bordures ── */
+html.dark .border-gray-100, html.dark .border-gray-200 { border-color: #26334e; }
+html.dark .border-gray-300 { border-color: #3a4a68; }
+html.dark .border-blue-200 { border-color: #1e3a8a; }
+
+/* ── États de survol ── */
+html.dark .hover\:bg-gray-50:hover  { background-color: #16223a; }
+html.dark .hover\:bg-gray-100:hover { background-color: #1d2b45; }
+html.dark .hover\:text-gray-800:hover { color: #e2e8f0; }
+html.dark .hover\:text-gray-900:hover { color: #f1f5f9; }
+
+/* ── Ombres assombries pour rester sans auréoles claires ── */
+html.dark .shadow-sm { box-shadow: 0 1px 2px rgb(0 0 0 / .45); }
+html.dark .shadow-md { box-shadow: 0 2px 6px rgb(0 0 0 / .55); }
+html.dark .shadow-lg, html.dark .shadow-xl { box-shadow: 0 6px 18px rgb(0 0 0 / .6); }

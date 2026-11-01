@@ -1,0 +1,130 @@
+<!-- Page de détail de l'exercice Python -->
+{% extends "base.html" %}
+
+{% block title %}{{ exercice.titre }} - Python{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-6">
+        <nav class="text-sm text-gray-500 mb-4">
+            <a href="{% url 'app_python:accueil' %}" class="hover:text-blue-600">Python</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-900">{{ exercice.titre }}</span>
+        </nav>
+        
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold text-gray-900">{{ exercice.titre }}</h1>
+            <span class="px-3 py-1 text-sm rounded-full {% if exercice.niveau_difficulte == 'facile' %}bg-green-100 text-green-800{% elif exercice.niveau_difficulte == 'moyen' %}bg-yellow-100 text-yellow-800{% else %}bg-red-100 text-red-800{% endif %}">
+                {{ exercice.get_niveau_difficulte_display }}
+            </span>
+        </div>
+        
+        <div class="mt-4 flex items-center text-gray-600 text-sm">
+            <span>{{ exercice.date_creation|date:"F d, Y" }}</span>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Description de l'énigme</h2>
+                <div class="prose max-w-none">
+                    <p class="text-gray-700">{{ exercice.description_enigma }}</p>
+                </div>
+                
+                {% if exercice.code_skeleton %}
+                    <div class="mt-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Squelette de code</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                            <pre>{{ exercice.code_skeleton }}</pre>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if exercice.exemple_entrée %}
+                    <div class="mt-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Exemple(s) d'entrée</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm">
+                            <pre>{{ exercice.exemple_entrée }}</pre>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if exercice.exemple_sortie %}
+                    <div class="mt-4">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Exemple(s) de sortie</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm">
+                            <pre>{{ exercice.exemple_sortie }}</pre>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if exercice.tests_cachés %}
+                    <div class="mt-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Tests cachés</h3>
+                        <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                            <p class="text-sm text-yellow-800">Des tests de validation sont disponibles (non affichés pour des raisons de sécurité)</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Votre solution</h2>
+                
+                {% if request.user.is_authenticated and not request.user.is_enseignant %}
+                    {% if soumission_etudiante %}
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">Statut de la solution</span>
+                                <span class="px-2 py-1 rounded-full text-xs {% if soumission_etudiante.test_passed %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                                    {% if soumission_etudiante.test_passed %}Passé{% else %}Échoué{% endif %}
+                                </span>
+                            </div>
+                            
+                            {% if soumission_etudiante.test_passed %}
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-700">Note obtenue</span>
+                                    <span class="font-semibold text-gray-900">{{ soumission_etudiante.note_obtenue }}/{{ soumission_etudiante.max_note }}</span>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-700">Temps d'exécution</span>
+                                    <span class="font-semibold text-gray-900">{{ soumission_etudiante.temps_execution }}s</span>
+                                </div>
+                            {% endif %}
+                            
+                            <a href="{% url 'app_python:resoudre_exercice' pk=exercice.pk %}" class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                Mettre à jour la solution
+                            </a>
+                        </div>
+                    {% else %}
+                        <p class="text-gray-600 mb-4">Vous n'avez pas encore tenté cet exercice.</p>
+                        <a href="{% url 'app_python:resoudre_exercice' pk=exercice.pk %}" class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                            Commencer à résoudre
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <p class="text-gray-600">Connectez-vous en tant qu'étudiant pour résoudre cet exercice.</p>
+                {% endif %}
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">À propos de cet exercice</h2>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Dernière mise à jour:</span>
+                        <span class="font-medium">{{ exercice.date_mise_a_jour|date:"M d, Y" }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Nombre de soumissions:</span>
+                        <span class="font-medium">{{ exercice.soumissions.count }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

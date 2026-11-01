@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+psycopg = {extras = ["binary"], version = "*"}
+
+[dev-packages]
+djangorestframework = "*"
+python-decouple = "*"
+wjs = "*"
+pytest = "*"
+pytest-django = "*"
+
+[requires]
+python_version = "3.14"
+python_full_version = "3.14.7"

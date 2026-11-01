@@ -1,0 +1,131 @@
+<!-- Page d'inscription -->
+{% extends "base.html" %}
+
+{% block title %}Inscription - Plateforme d'apprentissage en ligne{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="bg-white rounded-lg shadow-md p-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">Créer un compte</h1>
+        
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="id_first_name" class="block text-sm font-medium text-gray-700 mb-2">Prénom *</label>
+                    <input type="text" name="first_name" id="id_first_name" required placeholder="ex. Ahmed"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% if form.first_name.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ form.first_name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="id_last_name" class="block text-sm font-medium text-gray-700 mb-2">Nom *</label>
+                    <input type="text" name="last_name" id="id_last_name" required placeholder="ex. Ben Ali"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% if form.last_name.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ form.last_name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="id_email" class="block text-sm font-medium text-gray-700 mb-2">Adresse e-mail *</label>
+                    <input type="email" name="email" id="id_email" required
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           placeholder="prenom.nom@gmail.com">
+                    {% if form.email.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ form.email.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                
+                <div>
+                    <label for="id_mot_de_passe" class="block text-sm font-medium text-gray-700 mb-2">Mot de passe *</label>
+                    <div class="relative">
+                        <input type="password" name="mot_de_passe" id="id_mot_de_passe" required
+                               placeholder="8 caractères minimum"
+                               class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button type="button" id="voir_mdp" aria-label="Afficher le mot de passe"
+                                class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700">
+                            <svg id="icone_voir" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            <svg id="icone_cacher" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L6.59 6.59m7.532 7.532l3.29 3.29"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    {% if form.mot_de_passe.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ form.mot_de_passe.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                
+                <div>
+                    <label for="id_mot_de_passe_confirmation" class="block text-sm font-medium text-gray-700 mb-2">Confirmer le mot de passe *</label>
+                    <input type="password" name="mot_de_passe_confirmation" id="id_mot_de_passe_confirmation" required placeholder="Répétez le mot de passe"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% if form.mot_de_passe_confirmation.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ form.mot_de_passe_confirmation.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                
+                <div>
+                    <label for="id_telephone" class="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
+                    <input type="tel" name="telephone" id="id_telephone" inputmode="numeric" maxlength="8"
+                           pattern="[2459][0-9]{7}" title="8 chiffres — mobile tunisien : commence par 2, 4, 5 ou 9"
+                           placeholder="XX XXX XXX"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% if form.telephone.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ form.telephone.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div>
+                <label for="id_date_naissance" class="block text-sm font-medium text-gray-700 mb-2">Date de naissance *</label>
+                <input type="date" name="date_naissance" id="id_date_naissance" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if form.date_naissance.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.date_naissance.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="id_photo_profil" class="block text-sm font-medium text-gray-700 mb-2">Photo de profil</label>
+                <input type="file" name="photo_profil" id="id_photo_profil" accept="image/*" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if form.photo_profil.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.photo_profil.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="flex items-center justify-between">
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+                    Créer un compte
+                </button>
+            </div>
+        </form>
+        
+        <div class="mt-6 text-center">
+            <p class="text-gray-600">Déjà un compte ? 
+                <a href="{% url 'app_web:connexion' %}" class="text-blue-600 hover:text-blue-800">Se connecter</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Afficher / masquer le mot de passe — champ « Mot de passe » uniquement
+    const champMdp = document.getElementById('id_mot_de_passe');
+    document.getElementById('voir_mdp').addEventListener('click', function () {
+        const rendreVisible = champMdp.type === 'password';
+        champMdp.type = rendreVisible ? 'text' : 'password';
+        document.getElementById('icone_voir').classList.toggle('hidden', rendreVisible);
+        document.getElementById('icone_cacher').classList.toggle('hidden', !rendreVisible);
+        this.setAttribute('aria-label', rendreVisible ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+    });
+</script>
+{% endblock %}

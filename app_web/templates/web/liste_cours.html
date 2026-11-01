@@ -1,0 +1,79 @@
+<!-- Page /developpement/ — style identique à /algorithmique/ -->
+{% extends "base.html" %}
+
+{% block title %}Développement Web & Mobile{% endblock %}
+
+{% block content %}
+<div class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Développement Web &amp; Mobile</h1>
+            <p class="text-xl text-gray-600">Les fondations du web, le multiplateforme Flutter/Dart et le natif Android (Java/XML)</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- Tuile : Développement Web -->
+            <a href="{{ url_web }}"
+               class="block bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-purple-500">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </span>
+                        <span class="px-3 py-1 text-sm rounded-full bg-purple-50 text-purple-700 font-medium">{{ nb_web }} cours</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Développement Web</h2>
+                    <p class="text-gray-600 mb-4">HTML, CSS, Bootstrap, JavaScript et PHP : les fondations du web.</p>
+                    <span class="text-purple-600 font-medium">{% if web_direct %}Commencer le cours →{% else %}Voir les cours →{% endif %}</span>
+                </div>
+            </a>
+
+            <!-- Tuile : Développement mobile (Cross-platform) -->
+            <a href="{{ url_mobile }}"
+               class="block bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-blue-500">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </span>
+                        <span class="px-3 py-1 text-sm rounded-full bg-blue-50 text-blue-700 font-medium">{{ nb_mobile }} cours</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Développement mobile (Cross-platform)</h2>
+                    <p class="text-gray-600 mb-4">Flutter &amp; Dart : applications multiplateformes Android / iOS / Web.</p>
+                    <span class="text-blue-600 font-medium">{% if mobile_direct %}Commencer le cours →{% else %}Voir les cours →{% endif %}</span>
+                </div>
+            </a>
+
+            <!-- Tuile : Développement Android natif -->
+            <a href="{{ url_android }}"
+               class="block bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-green-500">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m16-6h2m-2 6h2M9 19h6a2 2 0 002-2V7a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9z"></path>
+                            </svg>
+                        </span>
+                        <span class="px-3 py-1 text-sm rounded-full bg-green-50 text-green-700 font-medium">{{ nb_android }} cours</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Développement Android natif</h2>
+                    <p class="text-gray-600 mb-4">Java &amp; XML : activités, interfaces, Intents et SQLite.</p>
+                    <span class="text-green-600 font-medium">{% if android_direct %}Commencer le cours →{% else %}Voir les cours →{% endif %}</span>
+                </div>
+            </a>
+        </div>
+
+        {% if user.is_authenticated and user.is_enseignant %}
+        <div class="text-center">
+            <a href="{% url 'app_web:creation_cours' %}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                Créer un nouveau cours
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

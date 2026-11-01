@@ -1,0 +1,159 @@
+<!-- Page de consultation d'une leçon -->
+{% extends "base.html" %}
+
+{% block title %}{{ lecon.titre }} - {{ cours.titre }}{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Fil d'Ariane -->
+    <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-blue-600">Accueil</a>
+        <span class="mx-2">/</span>
+        <a href="{% url 'app_web:liste_cours' %}" class="hover:text-blue-600">Cours</a>
+        <span class="mx-2">/</span>
+        <a href="{% url 'app_web:detail_cours' slug=cours.slug %}" class="hover:text-blue-600">{{ cours.titre }}</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-900">{{ lecon.titre }}</span>
+    </nav>
+    
+    <!-- En-tête de la leçon -->
+    <div class="flex items-center justify-between mb-2">
+        <div>
+            <span class="text-sm text-gray-500">Module {{ lecon.module.titre }} — Leçon {{ lecon.ordre }}</span>
+            <h1 class="text-3xl font-bold text-gray-900">{{ lecon.titre }}</h1>
+        </div>
+    </div>
+    
+    <!-- Contenu HTML de la leçon -->
+    <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+        <div class="prose max-w-none">{{ lecon.contenu_html|safe }}</div>
+    </div>
+    
+    <!-- Vidéo jointe éventuelle -->
+    {% if lecon.fichier_video %}
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Vidéo de la leçon</h2>
+            <video controls class="w-full rounded-lg bg-black">
+                <source src="{{ lecon.fichier_video.url }}" type="video/mp4">
+                Votre navigateur ne prend pas en charge la lecture de vidéos.
+            </video>
+        </div>
+    {% endif %}
+    
+    <!-- Lecteur PDF intégré (PDF.js, fonctionne sur tous les navigateurs) -->
+    {% if lecon.fichier_pdf %}
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-gray-900">Document du cours</h2>
+                <div class="flex items-center space-x-4 text-sm">
+                    <a href="{{ lecon.fichier_pdf.url }}" target="_blank" class="text-blue-600 hover:text-blue-800">Ouvrir dans un nouvel onglet ⧉</a>
+                    <a href="{{ lecon.fichier_pdf.url }}" download class="text-gray-600 hover:text-gray-800">⬇ Télécharger</a>
+                </div>
+            </div>
+            
+            <div id="lepdf-conteneur"
+                 data-url="{{ lecon.fichier_pdf.url }}"
+                 class="bg-gray-100 rounded-lg p-4 space-y-4 max-h-[80vh] overflow-y-auto text-center"
+                 aria-label="Visionneuse du document">
+                <noscript>
+                    <iframe src="{{ lecon.fichier_pdf.url }}" class="w-full h-[80vh] rounded-lg" title="Document"></iframe>
+                </noscript>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button id="lepdf-charger-plus" type="button"
+                        class="hidden bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    Charger la suite
+                </button>
+                <p id="lepdf-etat" class="text-sm text-gray-500 mt-2">Chargement du document…</p>
+            </div>
+        </div>
+    {% endif %}
+    
+    <!-- Navigation entre leçons -->
+    <div class="flex items-center justify-between">
+        {% if precedente %}
+            <a href="{% url 'app_web:detail_lecon' pk=precedente.pk %}" class="bg-white border border-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-50 transition-colors">← {{ precedente.titre }}</a>
+        {% else %}
+            <span></span>
+        {% endif %}
+        <a href="{% url 'app_web:detail_cours' slug=cours.slug %}" class="text-gray-600 hover:text-gray-800">Retour au cours</a>
+        {% if suivante %}
+            <a href="{% url 'app_web:detail_lecon' pk=suivante.pk %}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">{{ suivante.titre }} →</a>
+        {% else %}
+            <span></span>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if lecon.fichier_pdf %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+    (function () {
+        const conteneur = document.getElementById('lepdf-conteneur');
+        const bouton = document.getElementById('lepdf-charger-plus');
+        const etat = document.getElementById('lepdf-etat');
+        if (!conteneur || typeof pdfjsLib === 'undefined') {
+            if (etat) etat.textContent = 'Lecteur indisponible — utilisez « Ouvrir dans un nouvel onglet » ci-dessus.';
+            return;
+        }
+        
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        
+        const url = conteneur.dataset.url;
+        const PAR_PAS = 8;
+        let prochainePage = 1, pdfDoc = null, enCours = false;
+        
+        async function rendrePage(numero) {
+            const page = await pdfDoc.getPage(numero);
+            const viewport = page.getViewport({ scale: 1.5 });
+            const canvas = document.createElement('canvas');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            canvas.className = 'mx-auto bg-white shadow-md rounded-md';
+            conteneur.appendChild(canvas);
+            await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        }
+        
+        async function rendreLot() {
+            if (enCours || !pdfDoc) return;
+            enCours = true;
+            bouton.disabled = true;
+            try {
+                const fin = Math.min(pdfDoc.numPages, prochainePage + PAR_PAS - 1);
+                while (prochainePage <= fin) {
+                    await rendrePage(prochainePage);
+                    prochainePage++;
+                }
+                etat.textContent = `Pages affichées : ${prochainePage - 1} / ${pdfDoc.numPages}`;
+                if (prochainePage <= pdfDoc.numPages) {
+                    bouton.hidden = false;
+                    bouton.textContent = `Charger la suite (${prochainePage}–${Math.min(prochainePage + PAR_PAS - 1, pdfDoc.numPages)})`;
+                }
+            } catch (erreur) {
+                console.error(erreur);
+                etat.textContent = 'Erreur de lecture du document — « Ouvrir dans un nouvel onglet » ci-dessus.';
+            } finally {
+                enCours = false;
+                bouton.disabled = false;
+            }
+        }
+        
+        bouton.addEventListener('click', rendreLot);
+        
+        pdfjsLib.getDocument(url).promise.then(function (doc) {
+            pdfDoc = doc;
+            return rendreLot();
+        }).catch(function (erreur) {
+            console.error(erreur);
+            etat.innerHTML =
+                'Impossible de charger le document dans la page — ' +
+                '<a href="' + url + '" target="_blank" class="text-blue-600 hover:underline">l\'ouvrir ici</a>.';
+        });
+    })();
+    </script>
+{% endif %}
+{% endblock %}

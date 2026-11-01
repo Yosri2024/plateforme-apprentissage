@@ -1,0 +1,25 @@
+<!-- Carte d'un cours (incluse dans les listes par sous-domaine) -->
+<div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+    <a href="{% url 'app_web:detail_cours' slug=cours.slug %}">
+        {% if cours.image_couverture %}
+            <img src="{{ cours.image_couverture.url }}" alt="{{ cours.titre }}" class="w-full h-40 object-cover rounded-t-lg">
+        {% else %}
+            <div class="w-full h-40 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-t-lg flex items-center justify-center">
+                <svg class="w-12 h-12 text-white opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+            </div>
+        {% endif %}
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold text-gray-900">{{ cours.titre }}</h3>
+                <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">{{ cours.get_niveau_display }}</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">{{ cours.description|truncatewords:15 }}</p>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>{{ cours.date_creation|date:"M d, Y" }}</span>
+                <span>{{ cours.modules.count }} modules</span>
+            </div>
+        </div>
+    </a>
+</div>

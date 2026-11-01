@@ -1,0 +1,91 @@
+<!-- Détail d'un cours -->
+{% extends "base.html" %}
+
+{% block title %}{{ cours.titre }} - Plateforme d'apprentissage en ligne{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-6">
+        <nav class="text-sm text-gray-500 mb-4">
+            <a href="{% url 'app_web:accueil' %}" class="hover:text-blue-600">Accueil</a>
+            <span class="mx-2">/</span>
+            <a href="{% if cours.domaine == 'algo' %}/algorithmique/{% elif cours.domaine == 'bdd' %}/{% else %}{% url 'app_web:liste_cours' %}{% endif %}" class="hover:text-blue-600">{% if cours.domaine == 'algo' %}Algo &amp; ASD{% elif cours.domaine == 'bdd' %}Catalogue{% else %}Développement{% endif %}</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-900">{{ cours.titre }}</span>
+        </nav>
+        
+        {% if cours.image_banniere %}
+            <img src="{{ cours.image_banniere.url }}" alt="{{ cours.titre }}" class="w-full h-64 object-cover rounded-lg mb-6">
+        {% elif cours.image_couverture %}
+            <img src="{{ cours.image_couverture.url }}" alt="{{ cours.titre }}" class="w-full h-64 object-cover rounded-lg mb-6">
+        {% endif %}
+        
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold text-gray-900">{{ cours.titre }}</h1>
+            <span class="px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-800">{{ cours.get_niveau_display }}</span>
+        </div>
+        
+        <p class="text-gray-600 mt-4">{{ cours.description }}</p>
+        
+        <div class="mt-4 text-sm text-gray-500">
+            <span>{{ cours.date_creation|date:"F d, Y" }}</span>
+            <span class="mx-2">•</span>
+            <span>{{ cours.modules.count }} modules</span>
+        </div>
+        
+        {% if user.is_authenticated and user == cours.enseignant %}
+            <div class="mt-4 flex space-x-4">
+                <a href="{% url 'app_web:modifier_cours' slug=cours.slug %}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Modifier</a>
+                <a href="{% url 'app_web:supprimer_cours' slug=cours.slug %}" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">Supprimer</a>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% if modules %}
+        <div class="space-y-6">
+            {% for module in modules %}
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module {{ module.ordre }}</span>{{ module.titre }}
+                        </h2>
+                        {% if module.description %}
+                            <p class="text-gray-600 text-sm mt-1">{{ module.description }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    {% if module.lecons.all %}
+                        <div class="divide-y divide-gray-200">
+                            {% for lecon in module.lecons.all %}
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="{% url 'app_web:detail_lecon' pk=lecon.pk %}" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon {{ module.total_avant|add:lecon.ordre }}">
+                                            {{ module.total_avant|add:lecon.ordre }}
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">{{ lecon.titre }}</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        {% if lecon.fichier_video %}
+                                            <span class="text-xs text-gray-500">Vidéo</span>
+                                        {% endif %}
+                                        {% if lecon.fichier_pdf %}
+                                            <a href="{% url 'app_web:detail_lecon' pk=lecon.pk %}" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="px-6 py-4 text-gray-500 text-sm">Aucune leçon dans ce module pour le moment.</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="bg-white rounded-lg shadow-md p-12 text-center">
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Aucun module pour le moment</h2>
+            <p class="text-gray-600">Le contenu de ce cours sera disponible prochainement.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!-- Liste des cours d'un sous-domaine (web / mobile) -->
+{% extends "base.html" %}
+
+{% block title %}{{ titre }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <a href="{% url 'app_web:liste_cours' %}" class="text-blue-600 hover:text-blue-800 text-sm font-medium mb-4 inline-block">← Développement Web &amp; Mobile</a>
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">{{ titre }}</h1>
+        <p class="text-gray-600 mt-1">{{ description_categorie }}</p>
+    </div>
+
+    {% if cours_liste %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for cours in cours_liste %}
+                {% include "web/_carte_cours.html" %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="bg-white rounded-lg shadow-md p-12 text-center">
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Aucun cours pour le moment</h2>
+            <p class="text-gray-600">Revenez bientôt — les cours de cette catégorie arrivent.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

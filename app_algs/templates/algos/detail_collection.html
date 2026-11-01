@@ -1,0 +1,66 @@
+<!-- Page de détail de collection de problèmes d'algorithmes -->
+{% extends "base.html" %}
+
+{% block title %}{{ collection.titre }} - Collection{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-6">
+        <nav class="text-sm text-gray-500 mb-4">
+            <a href="{% url 'app_algs:accueil' %}" class="hover:text-blue-600">Algorithmes</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-900">{{ collection.titre }}</span>
+        </nav>
+        
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold text-gray-900">{{ collection.titre }}</h1>
+            <span class="px-3 py-1 text-sm rounded-full {% if collection.est_publique %}bg-green-100 text-green-800{% else %}bg-gray-100 text-gray-800{% endif %}">
+                {% if collection.est_publique %}Publique{% else %}Privée{% endif %}
+            </span>
+        </div>
+        
+        {% if collection.description %}
+            <p class="text-gray-600 mt-4">{{ collection.description }}</p>
+        {% endif %}
+        
+        <div class="mt-4 text-sm text-gray-500">
+            <span>Créée par {{ collection.etudiant.get_full_name|default:"un étudiant" }}</span>
+            <span class="mx-2">•</span>
+            <span>{{ collection.date_creation|date:"F d, Y" }}</span>
+            <span class="mx-2">•</span>
+            <span>{{ collection.probleme.count }} problèmes</span>
+        </div>
+    </div>
+    
+    {% if collection.probleme.exists %}
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6">Problèmes dans cette collection</h2>
+            
+            <div class="space-y-4">
+                {% for probleme in collection.probleme.all %}
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <a href="{% url 'app_algs:detail_probleme' pk=probleme.pk %}" class="flex-1">
+                            <h3 class="font-semibold text-gray-900">{{ probleme.titre }}</h3>
+                            <p class="text-sm text-gray-600 mt-1">{{ probleme.description|truncatewords:30 }}</p>
+                        </a>
+                        <div class="flex items-center space-x-4">
+                            <span class="px-2 py-1 text-xs rounded-full {% if probleme.difficulte == 'facile' %}bg-green-100 text-green-800{% elif probleme.difficulte == 'moyen' %}bg-yellow-100 text-yellow-800{% else %}bg-red-100 text-red-800{% endif %}">
+                                {{ probleme.get_difficulte_display }}
+                            </span>
+                            {% if request.user == collection.etudiant or request.user.is_enseignant %}
+                                <a href="{% url 'app_algs:resoudre_probleme' pk=probleme.pk %}" class="text-blue-600 hover:text-blue-800 text-sm">
+                                    Résoudre
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="bg-white rounded-lg shadow-md p-12 text-center">
+            <p class="text-gray-600">Cette collection ne contient aucun problème.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

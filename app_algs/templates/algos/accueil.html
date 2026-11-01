@@ -1,0 +1,84 @@
+<!-- Page d'accueil : Algo & ASD (choisir Lycée / Fac) -->
+{% extends "base.html" %}
+
+{% block title %}Algo & ASD - Plateforme d'apprentissage en ligne{% endblock %}
+
+{% block content %}
+<div class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Algo &amp; ASD</h1>
+            <p class="text-xl text-gray-600">Algorithmique, structures de données et programmation — du Lycée à la Faculté</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <!-- Tuile : Lycée -->
+            <a href="{% url 'app_algs:cours_lycee' %}"
+               class="block bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-blue-500">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                            </svg>
+                        </span>
+                        <span class="px-3 py-1 text-sm rounded-full bg-blue-50 text-blue-700 font-medium">{% if cours_lycee %}1 cours{% else %}0 cours{% endif %}</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Lycée</h2>
+                    <p class="text-gray-600 mb-4">Préparation au <strong>baccalauréat</strong> : algorithmes classiques
+                    (tris, recherche, PGCD), récursivité, fichiers, <strong>Python et Qt</strong> — condensés pour la révision.</p>
+                    <span class="text-blue-600 font-medium">Voir les cours →</span>
+                </div>
+            </a>
+
+            <!-- Tuile : Fac -->
+            <a href="{% url 'app_algs:cours_fac' %}"
+               class="block bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-purple-500">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </span>
+                        <span class="px-3 py-1 text-sm rounded-full bg-purple-50 text-purple-700 font-medium">{{ cours_fac|length }} cours</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Fac (Faculté)</h2>
+                    <p class="text-gray-600 mb-4">Modules <strong>ASD &amp; POO</strong> : structures de données,
+                    complexité, graphes et programmation orientée objet (Java).</p>
+                    <span class="text-purple-600 font-medium">Voir les cours →</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="text-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8">Problèmes populaires</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {% for probleme in problemes %}
+                    <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <a href="{% url 'app_algs:detail_probleme' pk=probleme.pk %}">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="font-semibold text-gray-900">{{ probleme.titre }}</h3>
+                                    <span class="px-2 py-1 text-xs rounded-full {% if probleme.difficulte == 'facile' %}bg-green-100 text-green-800{% elif probleme.difficulte == 'moyen' %}bg-yellow-100 text-yellow-800{% else %}bg-red-100 text-red-800{% endif %}">
+                                        {{ probleme.get_difficulte_display }}
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">{{ probleme.description|truncatewords:20 }}</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    {{ probleme.date_creation|date:"M d, Y" }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
