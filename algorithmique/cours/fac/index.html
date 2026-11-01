@@ -1,0 +1,160 @@
+<!-- Liste des cours Algo & ASD d'un public cible (lycee / fac) -->
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours Fac — Algo &amp; ASD</title>
+
+    <!-- Mode nuit : applique la préférence AVANT le premier rendu (aucun flash blanc) -->
+    <script>
+        (function () {
+            try {
+                var pref = localStorage.getItem('theme');
+                if (pref === 'dark' || (!pref && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) { /* pas de localStorage : reste en mode jour */ }
+        })();
+    </script>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Styles personnalisés -->
+    <link rel="stylesheet" href="/plateforme-apprentissage/static/css/app.css">
+    
+    
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/plateforme-apprentissage/" class="text-xl font-bold text-blue-600">Platforme Apprendre</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button type="button" id="basculer_theme" onclick="basculerTheme()"
+                            aria-label="Basculer le mode nuit" title="Passer en mode nuit"
+                            class="w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center text-lg transition-colors">🌙</button>
+                    
+                        <a href="/plateforme-apprentissage/connexion/" class="text-gray-700 hover:text-blue-600">Connexion</a>
+                        <a href="/plateforme-apprentissage/inscription/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Inscription</a>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages Flash -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <a href="/plateforme-apprentissage/algorithmique/" class="text-purple-600 hover:text-purple-800 text-sm font-medium mb-4 inline-block">← Algo &amp; ASD</a>
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Cours Fac — Algo &amp; ASD</h1>
+        <p class="text-gray-600 mt-1">ASD &amp; POO : structures de données avancées, complexité, graphes et programmation orientée objet (Java).</p>
+    </div>
+
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+                <!-- Carte d'un cours (incluse dans les listes par sous-domaine) -->
+<div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+    <a href="/plateforme-apprentissage/cours/asd1/">
+        
+            <img src="/plateforme-apprentissage/media/images_couverture/algorithmique-structures-donnees-c.png" alt="ASD1 (langage C) — Algorithmique et Structures de Données 1" class="w-full h-40 object-cover rounded-t-lg">
+        
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold text-gray-900">ASD1 (langage C) — Algorithmique et Structures de Données 1</h3>
+                <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Débutant</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">Module ASD1 (universitaire) en pseudocode ET langage C : introduction, éléments de base, structures décisionnelles …</p>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>Nov 01, 2026</span>
+                <span>1 modules</span>
+            </div>
+        </div>
+    </a>
+</div>
+
+            
+                <!-- Carte d'un cours (incluse dans les listes par sous-domaine) -->
+<div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+    <a href="/plateforme-apprentissage/cours/asd2/">
+        
+            <img src="/plateforme-apprentissage/media/images_couverture/algorithmique-structures-donnees-c.png" alt="ASD2 — Algorithmique et Structures de Données 2" class="w-full h-40 object-cover rounded-t-lg">
+        
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold text-gray-900">ASD2 — Algorithmique et Structures de Données 2</h3>
+                <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Avancé</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">Module ASD2 (universitaire) : types de données abstraits, récursivité et complexité, listes (contiguës et chaînées), …</p>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>Nov 01, 2026</span>
+                <span>5 modules</span>
+            </div>
+        </div>
+    </a>
+</div>
+
+            
+                <!-- Carte d'un cours (incluse dans les listes par sous-domaine) -->
+<div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+    <a href="/plateforme-apprentissage/cours/poo/">
+        
+            <img src="/plateforme-apprentissage/media/images_couverture/poo-java.png" alt="POO — Programmation Orientée Objet (Java)" class="w-full h-40 object-cover rounded-t-lg">
+        
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold text-gray-900">POO — Programmation Orientée Objet (Java)</h3>
+                <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Intermédiaire</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">Module POO (universitaire) : syntaxe Java, classes &amp; objets, collections, héritage et polymorphisme, classes abstraites …</p>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>Nov 01, 2026</span>
+                <span>8 modules</span>
+            </div>
+        </div>
+    </a>
+</div>
+
+            
+        </div>
+    
+</div>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-gray-600">
+                <p>&copy; 2026 Plateforme d'apprentissage en ligne. Tous droits réservés.</p>
+                <p class="text-sm text-gray-500 mt-2 italic">
+                    🙏 Un grand merci à tous les enseignants dont les cours ont rendu cette plateforme possible.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/plateforme-apprentissage/static/js/app.js"></script>
+    
+    
+</body>
+</html>

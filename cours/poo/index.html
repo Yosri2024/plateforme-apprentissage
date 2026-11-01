@@ -1,0 +1,601 @@
+<!-- Détail d'un cours -->
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POO — Programmation Orientée Objet (Java) - Plateforme d'apprentissage en ligne</title>
+
+    <!-- Mode nuit : applique la préférence AVANT le premier rendu (aucun flash blanc) -->
+    <script>
+        (function () {
+            try {
+                var pref = localStorage.getItem('theme');
+                if (pref === 'dark' || (!pref && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) { /* pas de localStorage : reste en mode jour */ }
+        })();
+    </script>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Styles personnalisés -->
+    <link rel="stylesheet" href="/plateforme-apprentissage/static/css/app.css">
+    
+    
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/plateforme-apprentissage/" class="text-xl font-bold text-blue-600">Platforme Apprendre</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button type="button" id="basculer_theme" onclick="basculerTheme()"
+                            aria-label="Basculer le mode nuit" title="Passer en mode nuit"
+                            class="w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center text-lg transition-colors">🌙</button>
+                    
+                        <a href="/plateforme-apprentissage/connexion/" class="text-gray-700 hover:text-blue-600">Connexion</a>
+                        <a href="/plateforme-apprentissage/inscription/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Inscription</a>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages Flash -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-6">
+        <nav class="text-sm text-gray-500 mb-4">
+            <a href="/plateforme-apprentissage/" class="hover:text-blue-600">Accueil</a>
+            <span class="mx-2">/</span>
+            <a href="/plateforme-apprentissage/algorithmique/" class="hover:text-blue-600">Algo &amp; ASD</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-900">POO — Programmation Orientée Objet (Java)</span>
+        </nav>
+        
+        
+            <img src="/plateforme-apprentissage/media/images_couverture/banniere-poo-java.png" alt="POO — Programmation Orientée Objet (Java)" class="w-full h-64 object-cover rounded-lg mb-6">
+        
+        
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold text-gray-900">POO — Programmation Orientée Objet (Java)</h1>
+            <span class="px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-800">Intermédiaire</span>
+        </div>
+        
+        <p class="text-gray-600 mt-4">Module POO (universitaire) : syntaxe Java, classes &amp; objets, collections, héritage et polymorphisme, classes abstraites et interfaces, gestion des exceptions — cours, supports détaillés (ESEN), TD avec corrections, examens et TP corrigés.</p>
+        
+        <div class="mt-4 text-sm text-gray-500">
+            <span>novembre 01, 2026</span>
+            <span class="mx-2">•</span>
+            <span>8 modules</span>
+        </div>
+        
+        
+    </div>
+    
+    
+        <div class="space-y-6">
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 1</span>Syntaxe de base du langage Java
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">Les éléments de base du langage : syntaxe, types et instructions fondamentales.</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/44/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 1">
+                                            1
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Éléments de base du langage Java</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/44/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 2</span>Classes &amp; objets
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">Le cœur de la POO : définir des classes, créer des objets, encapsulation.</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/45/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 2">
+                                            2
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Introduction à la POO</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/45/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/46/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 3">
+                                            3
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Classes &amp; objets en Java</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/46/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/47/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 4">
+                                            4
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Classes &amp; objets — cours détaillé</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/47/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 3</span>Collections d&#x27;objets
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">Des tableaux aux collections : stocker et manipuler plusieurs objets.</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/48/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 5">
+                                            5
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Collections d&#x27;objets dans Java</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/48/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/49/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 6">
+                                            6
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Tableaux vs Collections</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/49/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 4</span>Héritage, polymorphisme &amp; classes abstraites
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">La réutilisation et la généralisation des classes.</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/50/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 7">
+                                            7
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Héritage &amp; polymorphisme</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/50/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/51/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 8">
+                                            8
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Héritage, polymorphisme et classes abstraites (complément)</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/51/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 5</span>Interfaces
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">Interfaces Java et premières interfaces graphiques.</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/52/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 9">
+                                            9
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Interfaces</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/52/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/53/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 10">
+                                            10
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">TP 7 — Interfaces graphiques</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/53/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 6</span>Gestion des exceptions
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">try/catch/finally, exceptions personnalisées — avec corrections.</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/67/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 11">
+                                            11
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">TP — Gestion des exceptions (corrigé)</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/67/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 7</span>Supports détaillés (ESEN Manouba)
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">Chapitres détaillés d&#x27;un second cours de POO (ESEN) pour approfondir chaque partie.</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/54/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 12">
+                                            12
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Ch. 1 — Introduction à la POO (ESEN)</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/54/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/55/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 13">
+                                            13
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Ch. 2 — Le langage Java (ESEN)</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/55/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/56/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 14">
+                                            14
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Ch. 3 — Les bases de la POO (ESEN)</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/56/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/57/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 15">
+                                            15
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Ch. 4 — Héritage et interfaces (ESEN)</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/57/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/58/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 16">
+                                            16
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Ch. 5 — Les collections (ESEN)</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/58/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/59/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 17">
+                                            17
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Initiation à la programmation orientée objet</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/59/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 8</span>TD &amp; examens
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">Séries de TD avec corrections et examens pour s&#x27;entraîner.</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/61/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 18">
+                                            18
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">TD 1 — Initiation au langage Java</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/61/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/62/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 19">
+                                            19
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Correction TD 1</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/62/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/60/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 20">
+                                            20
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">TD 2 (ISG) — Série d&#x27;exercices</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/60/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/63/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 21">
+                                            21
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">TD 2 — Comptes bancaires (ESEN)</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/63/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/64/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 22">
+                                            22
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Examen principal — sujet</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/64/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/65/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 23">
+                                            23
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Examen principal — correction</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/65/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+        </div>
+    
+</div>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-gray-600">
+                <p>&copy; 2026 Plateforme d'apprentissage en ligne. Tous droits réservés.</p>
+                <p class="text-sm text-gray-500 mt-2 italic">
+                    🙏 Un grand merci à tous les enseignants dont les cours ont rendu cette plateforme possible.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/plateforme-apprentissage/static/js/app.js"></script>
+    
+    
+</body>
+</html>

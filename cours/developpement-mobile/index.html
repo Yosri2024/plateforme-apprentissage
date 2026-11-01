@@ -1,0 +1,212 @@
+<!-- Détail d'un cours -->
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Développement mobile (Cross-platform) - Plateforme d'apprentissage en ligne</title>
+
+    <!-- Mode nuit : applique la préférence AVANT le premier rendu (aucun flash blanc) -->
+    <script>
+        (function () {
+            try {
+                var pref = localStorage.getItem('theme');
+                if (pref === 'dark' || (!pref && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) { /* pas de localStorage : reste en mode jour */ }
+        })();
+    </script>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Styles personnalisés -->
+    <link rel="stylesheet" href="/plateforme-apprentissage/static/css/app.css">
+    
+    
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/plateforme-apprentissage/" class="text-xl font-bold text-blue-600">Platforme Apprendre</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button type="button" id="basculer_theme" onclick="basculerTheme()"
+                            aria-label="Basculer le mode nuit" title="Passer en mode nuit"
+                            class="w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center text-lg transition-colors">🌙</button>
+                    
+                        <a href="/plateforme-apprentissage/connexion/" class="text-gray-700 hover:text-blue-600">Connexion</a>
+                        <a href="/plateforme-apprentissage/inscription/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Inscription</a>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages Flash -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-6">
+        <nav class="text-sm text-gray-500 mb-4">
+            <a href="/plateforme-apprentissage/" class="hover:text-blue-600">Accueil</a>
+            <span class="mx-2">/</span>
+            <a href="/plateforme-apprentissage/developpement/" class="hover:text-blue-600">Développement</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-900">Développement mobile (Cross-platform)</span>
+        </nav>
+        
+        
+            <img src="/plateforme-apprentissage/media/images_couverture/banniere-flutter-mobile-cross-platform.png" alt="Développement mobile (Cross-platform)" class="w-full h-64 object-cover rounded-lg mb-6">
+        
+        
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold text-gray-900">Développement mobile (Cross-platform)</h1>
+            <span class="px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-800">Débutant</span>
+        </div>
+        
+        <p class="text-gray-600 mt-4">Cours de développement d&#x27;applications mobiles multiplateformes avec Flutter &amp; Dart : installation manuelle de l&#x27;environnement, premiers projets, puis ateliers pratiques — authentification utilisateur, session persistante, navigation et menus.</p>
+        
+        <div class="mt-4 text-sm text-gray-500">
+            <span>novembre 01, 2026</span>
+            <span class="mx-2">•</span>
+            <span>2 modules</span>
+        </div>
+        
+        
+    </div>
+    
+    
+        <div class="space-y-6">
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 1</span>Installation &amp; prise en main
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">Préparer l&#x27;environnement de développement Flutter (SDK, Dart, éditeur, émulateur) et créer un premier projet.</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/14/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 1">
+                                            1
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Bien démarrer avec Flutter &amp; Dart</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/15/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 2">
+                                            2
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Guide d&#x27;installation Flutter</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/15/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-xl font-semibold text-gray-900">
+                            <span class="text-gray-400 mr-2">Module 2</span>Ateliers pratiques
+                        </h2>
+                        
+                            <p class="text-gray-600 text-sm mt-1">Ateliers guidés par M. Firas Saafi : authentification avec session, page d&#x27;accueil, menu latéral (Drawer).</p>
+                        
+                    </div>
+                    
+                    
+                        <div class="divide-y divide-gray-200">
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/16/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 3">
+                                            3
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Atelier 2 — Inscription, connexion &amp; session utilisateur</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/16/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                    <a href="/plateforme-apprentissage/lecons/17/" class="flex items-center flex-1 group">
+                                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors" title="Leçon 4">
+                                            4
+                                        </span>
+                                        <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Atelier 3 — Page d&#x27;accueil &amp; menu latéral (Drawer)</h3>
+                                    </a>
+                                    <div class="flex items-center space-x-3">
+                                        
+                                        
+                                            <a href="/plateforme-apprentissage/lecons/17/" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded hover:bg-red-100 transition-colors">PDF</a>
+                                        
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            
+        </div>
+    
+</div>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-gray-600">
+                <p>&copy; 2026 Plateforme d'apprentissage en ligne. Tous droits réservés.</p>
+                <p class="text-sm text-gray-500 mt-2 italic">
+                    🙏 Un grand merci à tous les enseignants dont les cours ont rendu cette plateforme possible.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/plateforme-apprentissage/static/js/app.js"></script>
+    
+    
+</body>
+</html>

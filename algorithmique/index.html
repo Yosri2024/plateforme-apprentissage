@@ -1,0 +1,141 @@
+<!-- Page d'accueil : Algo & ASD (choisir Lycée / Fac) -->
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo & ASD - Plateforme d'apprentissage en ligne</title>
+
+    <!-- Mode nuit : applique la préférence AVANT le premier rendu (aucun flash blanc) -->
+    <script>
+        (function () {
+            try {
+                var pref = localStorage.getItem('theme');
+                if (pref === 'dark' || (!pref && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) { /* pas de localStorage : reste en mode jour */ }
+        })();
+    </script>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Styles personnalisés -->
+    <link rel="stylesheet" href="/plateforme-apprentissage/static/css/app.css">
+    
+    
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/plateforme-apprentissage/" class="text-xl font-bold text-blue-600">Platforme Apprendre</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button type="button" id="basculer_theme" onclick="basculerTheme()"
+                            aria-label="Basculer le mode nuit" title="Passer en mode nuit"
+                            class="w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center text-lg transition-colors">🌙</button>
+                    
+                        <a href="/plateforme-apprentissage/connexion/" class="text-gray-700 hover:text-blue-600">Connexion</a>
+                        <a href="/plateforme-apprentissage/inscription/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Inscription</a>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages Flash -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+<div class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Algo &amp; ASD</h1>
+            <p class="text-xl text-gray-600">Algorithmique, structures de données et programmation — du Lycée à la Faculté</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <!-- Tuile : Lycée -->
+            <a href="/plateforme-apprentissage/algorithmique/cours/lycee/"
+               class="block bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-blue-500">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                            </svg>
+                        </span>
+                        <span class="px-3 py-1 text-sm rounded-full bg-blue-50 text-blue-700 font-medium">1 cours</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Lycée</h2>
+                    <p class="text-gray-600 mb-4">Préparation au <strong>baccalauréat</strong> : algorithmes classiques
+                    (tris, recherche, PGCD), récursivité, fichiers, <strong>Python et Qt</strong> — condensés pour la révision.</p>
+                    <span class="text-blue-600 font-medium">Voir les cours →</span>
+                </div>
+            </a>
+
+            <!-- Tuile : Fac -->
+            <a href="/plateforme-apprentissage/algorithmique/cours/fac/"
+               class="block bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-purple-500">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </span>
+                        <span class="px-3 py-1 text-sm rounded-full bg-purple-50 text-purple-700 font-medium">3 cours</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Fac (Faculté)</h2>
+                    <p class="text-gray-600 mb-4">Modules <strong>ASD &amp; POO</strong> : structures de données,
+                    complexité, graphes et programmation orientée objet (Java).</p>
+                    <span class="text-purple-600 font-medium">Voir les cours →</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="text-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8">Problèmes populaires</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-gray-600">
+                <p>&copy; 2026 Plateforme d'apprentissage en ligne. Tous droits réservés.</p>
+                <p class="text-sm text-gray-500 mt-2 italic">
+                    🙏 Un grand merci à tous les enseignants dont les cours ont rendu cette plateforme possible.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/plateforme-apprentissage/static/js/app.js"></script>
+    
+    
+</body>
+</html>

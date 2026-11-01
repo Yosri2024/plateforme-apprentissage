@@ -1,0 +1,104 @@
+<!-- Page d'accueil -->
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Plateforme d'apprentissage en ligne</title>
+
+    <!-- Mode nuit : applique la préférence AVANT le premier rendu (aucun flash blanc) -->
+    <script>
+        (function () {
+            try {
+                var pref = localStorage.getItem('theme');
+                if (pref === 'dark' || (!pref && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) { /* pas de localStorage : reste en mode jour */ }
+        })();
+    </script>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Styles personnalisés -->
+    <link rel="stylesheet" href="/plateforme-apprentissage/static/css/app.css">
+    
+    
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/plateforme-apprentissage/" class="text-xl font-bold text-blue-600">Platforme Apprendre</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button type="button" id="basculer_theme" onclick="basculerTheme()"
+                            aria-label="Basculer le mode nuit" title="Passer en mode nuit"
+                            class="w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center text-lg transition-colors">🌙</button>
+                    
+                        <a href="#" class="text-gray-700 hover:text-blue-600">Profile</a>
+                        
+                        
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages Flash -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+<div class="text-center py-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">Bienvenue sur la plateforme d'apprentissage en ligne</h1>
+    <p class="text-xl text-gray-600 mb-8">Apprenez des compétences web et algorithmiques à votre rythme</p>
+    
+    
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-2xl mx-auto">
+        <h2 class="text-2xl font-semibold text-blue-900 mb-4">Bienvenue sur la plateforme !</h2>
+            <p class="text-blue-800 mb-4">Continuez là où vous vous êtes arrêté</p>
+            
+            
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="/plateforme-apprentissage/developpement/" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Cours de développement web &amp; mobile</a>
+                    <a href="/plateforme-apprentissage/algorithmique/" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">Algorithmique &amp; ASD &amp; POO</a>
+                    <a href="/plateforme-apprentissage/cours/php-mysql/" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">Base de données</a>
+                </div>
+            
+        </div>
+    
+</div>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-gray-600">
+                <p>&copy; 2026 Plateforme d'apprentissage en ligne. Tous droits réservés.</p>
+                <p class="text-sm text-gray-500 mt-2 italic">
+                    🙏 Un grand merci à tous les enseignants dont les cours ont rendu cette plateforme possible.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/plateforme-apprentissage/static/js/app.js"></script>
+    
+    
+</body>
+</html>
