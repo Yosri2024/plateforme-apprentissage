@@ -28,3 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
         bouton.title = sombre ? 'Passer en mode jour' : 'Passer en mode nuit';
     }
 });
+
+/* Navbar : ombre portée dès que la page est défilée */
+window.addEventListener('scroll', function () {
+    var nav = document.querySelector('nav');
+    if (nav) nav.classList.toggle('ombre-defilement', window.scrollY > 8);
+}, { passive: true });

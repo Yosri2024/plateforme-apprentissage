@@ -82,3 +82,88 @@ html.dark .hover\:text-gray-900:hover { color: #f1f5f9; }
 html.dark .shadow-sm { box-shadow: 0 1px 2px rgb(0 0 0 / .45); }
 html.dark .shadow-md { box-shadow: 0 2px 6px rgb(0 0 0 / .55); }
 html.dark .shadow-lg, html.dark .shadow-xl { box-shadow: 0 6px 18px rgb(0 0 0 / .6); }
+
+/* ============================================================
+   STYLE FLUIDE — raffinements d'interface
+   ============================================================ */
+
+/* Transition automatique douce entre les pages (navigateurs modernes,
+   dégradation silencieuse ailleurs) */
+@view-transition { navigation: auto; }
+
+html { scroll-behavior: smooth; }
+
+/* Entrée de page : léger fondu vers le haut */
+main {
+    animation: arrivee-page .45s ease both;
+}
+@keyframes arrivee-page {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Cartes & tuiles : apparition en cascade + élégance au survol */
+main .grid > a {
+    animation: arrivee-page .5s ease both;
+    transition: transform .25s ease, box-shadow .25s ease !important;
+}
+main .grid > a:nth-child(2) { animation-delay: .07s; }
+main .grid > a:nth-child(3) { animation-delay: .14s; }
+main .grid > a:nth-child(4) { animation-delay: .21s; }
+main .grid > a:hover {
+    transform: translateY(-4px);
+}
+main .grid > a:hover .shadow-md { /* le soulèvement double l'ombre */
+    box-shadow: 0 10px 22px rgb(15 23 42 / .12);
+}
+html.dark main .grid > a:hover .shadow-md {
+    box-shadow: 0 10px 22px rgb(0 0 0 / .55);
+}
+
+/* Transitions universelles courtes (couleurs, flexibles) */
+a, button, .transition-colors {
+    transition: color .18s ease, background-color .18s ease,
+                border-color .18s ease, opacity .18s ease;
+}
+
+/* Navbar en verre dépoli : reste visible + s'assombrit au défilement */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+    transition: background-color .25s ease, box-shadow .25s ease;
+}
+nav.bg-white {
+    background-color: rgb(255 255 255 / .82) !important; /* semi-transparence pour le flou */
+}
+html.dark nav.bg-white {
+    background-color: rgb(17 26 44 / .85) !important;
+}
+nav.ombre-defilement {
+    box-shadow: 0 4px 14px rgb(15 23 42 / .10);
+}
+html.dark nav.ombre-defilement {
+    box-shadow: 0 4px 14px rgb(0 0 0 / .45);
+}
+
+/* Barre de défilement discrète */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgb(148 163 184 / .45); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: rgb(100 116 139 / .6); }
+html.dark ::-webkit-scrollbar-thumb { background: #334155; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* Accessibilité : focus visible soigné, animations coupées si demandé */
+:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    main, main .grid > a { animation: none !important; }
+    nav { position: static; }
+    * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
