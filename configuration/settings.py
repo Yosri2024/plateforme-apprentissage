@@ -10,8 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-dev-key-changer-en-production')
 
 # Contrôles d'accès
-DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
+DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() == 'true'
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver', '.pythonanywhere.com']
 
 # Application définissant l'API visuelle
 INSTALLED_APPS = [
@@ -72,18 +72,33 @@ TEMPLATES = [
 # Configuration WSGI
 WSGI_APPLICATION = 'configuration.wsgi.application'
 
-# Configuration de la base de données - PostgreSQL, surchargable par variables d'environnement
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME', 'plateforme_db'),
-        'USER': os.environ.get('DATABASE_USER', 'plateforme_user'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'plateforme_dev_2026'),
-        'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
-        'PORT': os.environ.get('DATABASE_PORT', '5432'),
-        'CONN_MAX_AGE': 60,
+# Configuration de la base de données
+# - SQLite par défaut (zéro configuration, parfait pour PythonAnywhere)
+# - PostgreSQL si les variables DATABASE_* ou DATABASE_URL sont définies
+if os.environ.get('DATABASE_NAME') or os.environ.get('DATABASE_URL'):
+    if os.environ.get('DATABASE_URL'):
+        import dj_database_url
+
+        DATABASES = {'default': dj_database_url.parse(os.environ['DATABASE_URL'], conn_max_age=60)}
+    else:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': os.environ['DATABASE_NAME'],
+                'USER': os.environ.get('DATABASE_USER', 'plateforme_user'),
+                'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
+                'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
+                'PORT': os.environ.get('DATABASE_PORT', '5432'),
+                'CONN_MAX_AGE': 60,
+            }
+        }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 # Configuration de la validation des mots de passe
 AUTH_PASSWORD_VALIDATORS = [
