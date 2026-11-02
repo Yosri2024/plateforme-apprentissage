@@ -167,3 +167,66 @@ html.dark ::-webkit-scrollbar-thumb { background: #334155; }
     nav { position: static; }
     * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+/* ============================================================
+   RESPONSIVE — le site répond bien sur tous les types d'écrans
+   ============================================================ */
+
+/* Contenu généré (leçons HTML « prose ») : rien ne doit déborder,
+   même sur les plus petits écrans */
+.prose img { max-width: 100%; height: auto; border-radius: .5rem; }
+.prose table { display: block; width: 100%; overflow-x: auto; }
+.prose pre, .prose code { max-width: 100%; overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.prose iframe, .prose video { max-width: 100%; }
+.prose p, .prose li { overflow-wrap: break-word; }
+
+/* Pages rendues par PDF.js : les canvas sont générés à l'échelle 1.5
+   et peuvent être plus larges que l'écran — on les contraint */
+#lepdf-conteneur canvas {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Champs de formulaire : jamais plus grands que leur conteneur */
+main input, main select, main textarea { max-width: 100%; }
+
+/* Petits écrans : resserrer les titres trop larges */
+@media (max-width: 640px) {
+    .text-4xl { font-size: 1.75rem; line-height: 2.25rem; }
+    .text-3xl { font-size: 1.5rem; line-height: 2rem; }
+    main { padding-left: 1rem; padding-right: 1rem; }
+    .p-8 { padding: 1.25rem !important; }
+    .px-8 { padding-left: 1rem !important; padding-right: 1rem !important; }
+}
+
+/* ── Menu mobile : carte flottante ── */
+.menu-mobile {
+    transform-origin: top right;
+    animation: menu-ouvre .18s ease both;
+}
+.menu-mobile.ferme {
+    animation: menu-ferme .15s ease both;
+}
+@keyframes menu-ouvre {
+    from { opacity: 0; transform: translateY(-8px) scale(.97); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes menu-ferme {
+    from { opacity: 1; transform: none; }
+    to   { opacity: 0; transform: translateY(-8px) scale(.97); }
+}
+.menu-mobile-lien {
+    display: flex;
+    align-items: center;
+    padding: .75rem 1.25rem;
+    color: #374151;
+    transition: background-color .15s ease, color .15s ease;
+}
+.menu-mobile-lien svg { color: #94a3b8; transition: color .15s ease; }
+.menu-mobile-lien:hover {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+.menu-mobile-lien:hover svg { color: #3b82f6; }
+html.dark .menu-mobile-link,
+html.dark .menu-mobile-lien:hover { background-color: #16223a; }
